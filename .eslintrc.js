@@ -53,6 +53,8 @@ module.exports = {
 				bracketSpacing: true,
 				arrowParens: 'avoid',
 				bracketSameLine: true,
+				endOfLine: 'auto',
+				jsxBracketSameLine: true,
 			},
 		],
 		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
