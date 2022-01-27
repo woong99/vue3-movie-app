@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router';
 import Home from './Home';
 import Movie from './Movie';
 import About from './about';
+import NotFound from './NotFound';
 
 export default createRouter({
 	// Hash
@@ -22,5 +23,12 @@ export default createRouter({
 			path: '/about',
 			component: About,
 		},
+		{
+			path: '/:notFound(.*)',
+			component: NotFound,
+		},
 	],
+	scrollBehavior() {
+		return { top: 0 };
+	},
 });

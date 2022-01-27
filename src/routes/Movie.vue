@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import Loader from '~/components/Loader';
 export default {
 	components: {
@@ -80,21 +81,19 @@ export default {
 		};
 	},
 	computed: {
-		theMovie() {
-			return this.$store.state.movie.theMovie;
-		},
-		loading() {
-			return this.$store.state.movie.loading;
-		},
+		...mapState('movie', ['theMovie', 'loading']),
 	},
 	created() {
-		console.log(this.$route);
-		this.$store.dispatch('movie/searchMovieWithId', {
-			id: this.$route.params.id,
-		});
+		// this.$store.dispatch('movie/searchMovieWithId', {
+		this.searchMovieWithId({ id: this.$route.params.id });
 	},
 	methods: {
+		...mapActions('movie', ['searchMovieWithId']),
 		requestDiffSizeImage(url, size = 700) {
+			if (!url || url === 'N/A') {
+				this.imageLoading = false;
+				return '';
+			}
 			const src = url.replace('SX300', `SX${size}`);
 			this.$loadImage(src).then(() => {
 				this.imageLoading = false;
@@ -105,7 +104,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '~/scss/main';
 .container {
 	padding-top: 40px;
 }
@@ -202,6 +200,34 @@ export default {
 			color: $black;
 			font-family: 'Oswald', sans-serif;
 			font-size: 20px;
+		}
+	}
+	@include media-breakpoint-down(xl) {
+		.poster {
+			width: 300px;
+			height: 300px * 3/2;
+			margin-right: 40px;
+		}
+	}
+	@include media-breakpoint-down(lg) {
+		display: block;
+		.poster {
+			margin-bottom: 40px;
+		}
+	}
+	@include media-breakpoint-down(md) {
+		.specs {
+			.title {
+				font-size: 50px;
+			}
+			.ratings {
+				.rating-wrap {
+					display: block;
+					.rating {
+						margin-top: 10px;
+					}
+				}
+			}
 		}
 	}
 }
