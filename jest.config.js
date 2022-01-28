@@ -7,7 +7,7 @@ module.exports = {
 	// `~` 같은 경로 별칭을 매핑합니다.
 	// `<rootDir>` 토큰을 사용해 루트 경로를 참조할 수 있습니다.
 	// E.g. `import HelloWorld from '~/components/HelloWorld';`
-	moduleNamemapper: {
+	moduleNameMapper: {
 		'^~/(.*)$': '<rootDir>/src/$1',
 	},
 
